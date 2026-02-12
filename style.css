@@ -462,6 +462,7 @@ body {
         opacity: 0;
         transform: translateY(10px);
     }
+
     to {
         opacity: 0.85;
         transform: translateY(0);
@@ -475,14 +476,12 @@ body {
     animation: letterDrop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
     animation-delay: calc(0.5s + var(--i) * 0.12s);
     /* Shimmer effect */
-    background: linear-gradient(
-        120deg,
-        #c2185b 0%,
-        #e91e63 25%,
-        #ff6090 50%,
-        #e91e63 75%,
-        #c2185b 100%
-    );
+    background: linear-gradient(120deg,
+            #c2185b 0%,
+            #e91e63 25%,
+            #ff6090 50%,
+            #e91e63 75%,
+            #c2185b 100%);
     background-size: 200% auto;
     -webkit-background-clip: text;
     background-clip: text;
@@ -498,7 +497,8 @@ body {
 /* Shimmer sweep after letters land */
 .proposal-name:after {
     content: '';
-    display: none; /* using background-clip shimmer instead */
+    display: none;
+    /* using background-clip shimmer instead */
 }
 
 @keyframes letterDrop {
@@ -506,13 +506,16 @@ body {
         opacity: 0;
         transform: translateY(40px) scale(0.3) rotate(-15deg);
     }
+
     60% {
         opacity: 1;
         transform: translateY(-8px) scale(1.1) rotate(3deg);
     }
+
     80% {
         transform: translateY(3px) scale(0.95) rotate(-1deg);
     }
+
     100% {
         opacity: 1;
         transform: translateY(0) scale(1) rotate(0deg);
@@ -522,12 +525,17 @@ body {
 /* Shimmer animation on each letter after it lands */
 .name-letter {
     animation: letterDrop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards,
-               shimmer 2.5s ease-in-out 1.8s infinite;
+        shimmer 2.5s ease-in-out 1.8s infinite;
 }
 
 @keyframes shimmer {
-    0% { background-position: 200% center; }
-    100% { background-position: -200% center; }
+    0% {
+        background-position: 200% center;
+    }
+
+    100% {
+        background-position: -200% center;
+    }
 }
 
 /* --- Underline flourish --- */
@@ -546,6 +554,7 @@ body {
         width: 0;
         opacity: 0;
     }
+
     to {
         width: 70%;
         opacity: 1;
@@ -648,6 +657,320 @@ body {
         opacity: 1;
         transform: scale(1);
     }
+}
+
+/* ============================================
+   SCREEN 3 – COMPLIMENTS CAROUSEL
+   ============================================ */
+.compliment-emoji {
+    font-size: 60px;
+    margin-bottom: 15px;
+    display: inline-block;
+    animation: heartPulse 1.5s ease-in-out infinite;
+    filter: drop-shadow(0 0 15px rgba(255, 105, 180, 0.5));
+    transition: all 0.4s ease;
+}
+
+.compliment-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(1.5rem, 5.5vw, 2.2rem);
+    color: #ad1457;
+    margin-bottom: 25px;
+    font-weight: 700;
+}
+
+.compliment-card {
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 20px;
+    padding: 30px 25px;
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 8px 32px rgba(233, 30, 99, 0.12);
+    margin-bottom: 20px;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.compliment-card.swipe-out-left {
+    transform: translateX(-120%) rotate(-8deg);
+    opacity: 0;
+}
+
+.compliment-card.swipe-out-right {
+    transform: translateX(120%) rotate(8deg);
+    opacity: 0;
+}
+
+.compliment-card.swipe-in {
+    animation: swipeIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes swipeIn {
+    from {
+        transform: translateX(80%) rotate(5deg) scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0) rotate(0) scale(1);
+        opacity: 1;
+    }
+}
+
+.compliment-text {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(1.2rem, 4.5vw, 1.6rem);
+    color: #880e4f;
+    font-weight: 700;
+    line-height: 1.6;
+}
+
+.compliment-dots {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 25px;
+}
+
+.compliment-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(173, 20, 87, 0.25);
+    transition: all 0.3s ease;
+}
+
+.compliment-dot.active {
+    background: #e91e63;
+    transform: scale(1.3);
+    box-shadow: 0 0 10px rgba(233, 30, 99, 0.5);
+}
+
+.btn-next {
+    background: linear-gradient(135deg, #ec407a, #e91e63, #c2185b);
+    color: white;
+    box-shadow: 0 6px 25px rgba(233, 30, 99, 0.5), 0 0 30px rgba(255, 105, 180, 0.2);
+}
+
+.btn-next:hover {
+    transform: scale(1.06) translateY(-2px);
+    box-shadow: 0 10px 35px rgba(233, 30, 99, 0.6), 0 0 50px rgba(255, 105, 180, 0.3);
+}
+
+/* ============================================
+   SCREEN 4 – REASONS I LOVE YOU (FLIP CARDS)
+   ============================================ */
+.reasons-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(1.3rem, 4.5vw, 1.8rem);
+    color: #ad1457;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.reasons-number {
+    display: inline-block;
+    font-size: 1.15em;
+    color: #c2185b;
+    animation: heartPulse 1.2s ease-in-out infinite;
+}
+
+.reasons-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    margin-bottom: 15px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.reason-card {
+    perspective: 600px;
+    cursor: pointer;
+    touch-action: manipulation;
+    opacity: 0;
+    animation: cardAppear 0.5s ease forwards;
+    animation-delay: var(--delay);
+}
+
+@keyframes cardAppear {
+    from {
+        opacity: 0;
+        transform: scale(0.5) rotateY(90deg);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) rotateY(0);
+    }
+}
+
+.reason-inner {
+    position: relative;
+    width: 100%;
+    padding-bottom: 110%;
+    transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform-style: preserve-3d;
+}
+
+.reason-card.flipped .reason-inner {
+    transform: rotateY(180deg);
+}
+
+.reason-front,
+.reason-back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+.reason-front {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.4), rgba(248, 187, 208, 0.5));
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 4px 15px rgba(233, 30, 99, 0.12);
+    font-size: clamp(0.7rem, 2.5vw, 0.9rem);
+    color: #880e4f;
+    font-weight: 700;
+    gap: 2px;
+}
+
+.reason-front span {
+    font-size: clamp(1rem, 3.5vw, 1.3rem);
+}
+
+.reason-back {
+    background: linear-gradient(135deg, #e91e63, #c2185b);
+    color: white;
+    font-size: clamp(0.55rem, 2vw, 0.72rem);
+    font-weight: 600;
+    padding: 6px 5px;
+    transform: rotateY(180deg);
+    text-align: center;
+    line-height: 1.3;
+    box-shadow: 0 6px 20px rgba(233, 30, 99, 0.35);
+}
+
+.reasons-hint {
+    font-size: clamp(0.8rem, 2.5vw, 0.95rem);
+    color: #ad1457;
+    font-weight: 600;
+    margin-bottom: 18px;
+    opacity: 0.8;
+    animation: fadeIn 0.5s ease 1.2s both;
+}
+
+.btn-reasons-next {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease, transform 0.3s ease;
+}
+
+.btn-reasons-next.visible {
+    opacity: 1;
+    pointer-events: all;
+    animation: fadeSlideUp 0.6s ease both;
+}
+
+/* ============================================
+   SCREEN 5 – TYPEWRITER LOVE QUOTE
+   ============================================ */
+.typewriter-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 50vh;
+    min-height: 50dvh;
+}
+
+.typewriter-heart {
+    font-size: 50px;
+    margin-bottom: 25px;
+    animation: heartPulse 1.5s ease-in-out infinite;
+    filter: drop-shadow(0 0 20px rgba(255, 105, 180, 0.5));
+}
+
+.typewriter-box {
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 20px;
+    padding: 30px 25px;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 32px rgba(233, 30, 99, 0.12);
+    max-width: 480px;
+    width: 100%;
+    min-height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+    text-align: center;
+    flex-wrap: wrap;
+}
+
+.typewriter-text {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(1.2rem, 4.5vw, 1.7rem);
+    color: #880e4f;
+    font-weight: 700;
+    line-height: 1.6;
+    display: inline;
+}
+
+.typewriter-cursor {
+    display: inline-block;
+    color: #e91e63;
+    font-weight: 300;
+    font-size: clamp(1.3rem, 5vw, 1.8rem);
+    animation: cursorBlink 0.7s step-end infinite;
+    margin-left: 2px;
+}
+
+@keyframes cursorBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+.typewriter-sparkles {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+    font-size: 18px;
+}
+
+.typewriter-sparkles span {
+    opacity: 0;
+    animation: sparkleAppear 0.5s ease forwards;
+    animation-delay: calc(var(--d) * 0.3s + 4s);
+}
+
+@keyframes sparkleAppear {
+    from { opacity: 0; transform: scale(0) rotate(-180deg); }
+    to { opacity: 0.7; transform: scale(1) rotate(0); }
+}
+
+.btn-reveal {
+    background: linear-gradient(135deg, #ec407a, #e91e63, #c2185b);
+    color: white;
+    box-shadow: 0 6px 25px rgba(233, 30, 99, 0.5), 0 0 40px rgba(255, 105, 180, 0.3);
+    animation: yesGlow 1.5s ease-in-out infinite alternate;
+}
+
+.btn-reveal:hover {
+    transform: scale(1.08) translateY(-3px);
 }
 
 /* --- CONFETTI --- */
@@ -857,6 +1180,54 @@ body {
         padding-top: 10px;
         padding-bottom: 40px;
     }
+
+    /* New screens – small phones */
+    .compliment-emoji {
+        font-size: 42px;
+        margin-bottom: 10px;
+    }
+
+    .compliment-title {
+        font-size: 1.2rem;
+        margin-bottom: 16px;
+    }
+
+    .compliment-card {
+        padding: 22px 16px;
+        min-height: 80px;
+    }
+
+    .compliment-text {
+        font-size: 1rem;
+    }
+
+    .reasons-title {
+        font-size: 1.1rem;
+        margin-bottom: 14px;
+    }
+
+    .reasons-grid {
+        gap: 6px;
+    }
+
+    .reason-back {
+        font-size: 0.48rem;
+        padding: 4px 3px;
+    }
+
+    .typewriter-heart {
+        font-size: 35px;
+        margin-bottom: 15px;
+    }
+
+    .typewriter-box {
+        padding: 20px 16px;
+        min-height: 90px;
+    }
+
+    .typewriter-text {
+        font-size: 1rem;
+    }
 }
 
 /* Regular phones */
@@ -898,6 +1269,15 @@ body {
     .proposal-content {
         max-height: 88vh;
         max-height: 88dvh;
+    }
+
+    /* New screens – regular phones */
+    .reasons-grid {
+        gap: 8px;
+    }
+
+    .reason-back {
+        font-size: 0.52rem;
     }
 }
 

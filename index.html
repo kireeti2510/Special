@@ -65,15 +65,134 @@
         </div>
     </section>
 
-    <!-- ===================== SCREEN 3: PROPOSAL ===================== -->
+    <!-- ===================== SCREEN 3: COMPLIMENTS ===================== -->
     <section class="screen" id="screen3">
+        <div class="screen-content">
+            <div class="compliment-emoji" id="complimentEmoji">🌹</div>
+            <h2 class="compliment-title glow-text">Do you know how special you are?</h2>
+            <div class="compliment-card" id="complimentCard">
+                <p class="compliment-text" id="complimentText">Your smile could light up the darkest room ✨</p>
+            </div>
+            <div class="compliment-dots" id="complimentDots"></div>
+            <button class="btn btn-next" id="btnNextCompliment" onclick="nextCompliment()">
+                <span>Tell me more</span>
+                <span class="btn-icon">💕</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- ===================== SCREEN 4: REASONS I LOVE YOU ===================== -->
+    <section class="screen" id="screen4">
+        <div class="screen-content">
+            <h2 class="reasons-title glow-text">
+                <span class="reasons-number" id="reasonsCount">10</span> reasons why you make my heart race 💓
+            </h2>
+            <div class="reasons-grid" id="reasonsGrid">
+                <div class="reason-card" style="--delay: 0.1s" onclick="flipCard(this)">
+                    <div class="reason-inner">
+                        <div class="reason-front"><span>1</span> 💖</div>
+                        <div class="reason-back">The way you laugh at my silly jokes</div>
+                    </div>
+                </div>
+                <div class="reason-card" style="--delay: 0.2s" onclick="flipCard(this)">
+                    <div class="reason-inner">
+                        <div class="reason-front"><span>2</span> 💗</div>
+                        <div class="reason-back">Your eyes that hold entire galaxies</div>
+                    </div>
+                </div>
+                <div class="reason-card" style="--delay: 0.3s" onclick="flipCard(this)">
+                    <div class="reason-inner">
+                        <div class="reason-front"><span>3</span> 💕</div>
+                        <div class="reason-back">How you make ordinary moments feel magical</div>
+                    </div>
+                </div>
+                <div class="reason-card" style="--delay: 0.4s" onclick="flipCard(this)">
+                    <div class="reason-inner">
+                        <div class="reason-front"><span>4</span> 💘</div>
+                        <div class="reason-back">Your voice — my favorite melody</div>
+                    </div>
+                </div>
+                <div class="reason-card" style="--delay: 0.5s" onclick="flipCard(this)">
+                    <div class="reason-inner">
+                        <div class="reason-front"><span>5</span> 💝</div>
+                        <div class="reason-back">The kindness you show everyone around you</div>
+                    </div>
+                </div>
+                <div class="reason-card" style="--delay: 0.6s" onclick="flipCard(this)">
+                    <div class="reason-inner">
+                        <div class="reason-front"><span>6</span> 🩷</div>
+                        <div class="reason-back">How my heartbeat syncs to yours</div>
+                    </div>
+                </div>
+                <div class="reason-card" style="--delay: 0.7s" onclick="flipCard(this)">
+                    <div class="reason-inner">
+                        <div class="reason-front"><span>7</span> ❤️</div>
+                        <div class="reason-back">You believe in me even when I don't</div>
+                    </div>
+                </div>
+                <div class="reason-card" style="--delay: 0.8s" onclick="flipCard(this)">
+                    <div class="reason-inner">
+                        <div class="reason-front"><span>8</span> 💓</div>
+                        <div class="reason-back">The way you scrunch your nose when you smile</div>
+                    </div>
+                </div>
+                <div class="reason-card" style="--delay: 0.9s" onclick="flipCard(this)">
+                    <div class="reason-inner">
+                        <div class="reason-front"><span>9</span> 🌹</div>
+                        <div class="reason-back">Every moment with you is my favorite memory</div>
+                    </div>
+                </div>
+                <div class="reason-card" style="--delay: 1.0s" onclick="flipCard(this)">
+                    <div class="reason-inner">
+                        <div class="reason-front"><span>10</span> 💖</div>
+                        <div class="reason-back">Because you're YOU — and that's everything</div>
+                    </div>
+                </div>
+            </div>
+            <p class="reasons-hint">✨ Tap each card to reveal ✨</p>
+            <button class="btn btn-next btn-reasons-next" id="btnReasonsNext" onclick="goToScreen5()">
+                <span>Continue</span>
+                <span class="btn-icon">💕</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- ===================== SCREEN 5: TYPEWRITER LOVE QUOTE ===================== -->
+    <section class="screen" id="screen5">
+        <div class="screen-content">
+            <div class="typewriter-wrapper">
+                <div class="typewriter-heart">💌</div>
+                <div class="typewriter-box">
+                    <p class="typewriter-text" id="typewriterText"></p>
+                    <span class="typewriter-cursor" id="typewriterCursor">|</span>
+                </div>
+                <div class="typewriter-sparkles">
+                    <span style="--d:0">✨</span>
+                    <span style="--d:1">💫</span>
+                    <span style="--d:2">✨</span>
+                    <span style="--d:3">⭐</span>
+                    <span style="--d:4">✨</span>
+                </div>
+            </div>
+            <button class="btn btn-next btn-reveal" id="btnReveal" onclick="goToScreen6()" style="display:none;">
+                <span>See what's in my heart</span>
+                <span class="btn-icon">💖</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- ===================== SCREEN 6: PROPOSAL (was screen 3) ===================== -->
+    <section class="screen" id="screen6">
         <div class="screen-content proposal-content">
             <div class="confetti-container" id="confetti"></div>
             <div class="proposal-heart-burst" id="heartBurst"></div>
             <div class="name-reveal-wrapper">
                 <p class="name-prefix">This is for you,</p>
                 <h1 class="proposal-name glow-text-strong" id="proposalName">
-                    <span class="name-letter" style="--i:0">V</span><span class="name-letter" style="--i:1">A</span><span class="name-letter" style="--i:2">R</span><span class="name-letter" style="--i:3">S</span><span class="name-letter" style="--i:4">H</span><span class="name-letter" style="--i:5">A</span><span class="name-letter heart-letter" style="--i:6"> 💖</span>
+                    <span class="name-letter" style="--i:0">V</span><span class="name-letter"
+                        style="--i:1">A</span><span class="name-letter" style="--i:2">R</span><span class="name-letter"
+                        style="--i:3">S</span><span class="name-letter" style="--i:4">H</span><span class="name-letter"
+                        style="--i:5">A</span><span class="name-letter heart-letter" style="--i:6"> 💖</span>
                 </h1>
                 <div class="name-underline"></div>
             </div>

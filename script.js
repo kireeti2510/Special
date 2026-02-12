@@ -167,34 +167,55 @@ function initHeartTrail() {
 }
 
 // ---- Screen Transitions ----
-function goToScreen2() {
-    const screen1 = document.getElementById('screen1');
-    const screen2 = document.getElementById('screen2');
-
-    screen1.classList.remove('active');
+function transitionScreens(fromId, toId, onAfter) {
+    const from = document.getElementById(fromId);
+    const to = document.getElementById(toId);
+    from.classList.remove('active');
     setTimeout(() => {
-        screen2.classList.add('active');
-        initNoButton();
-    }, 400);
+        to.classList.add('active');
+        if (onAfter) onAfter();
+    }, 450);
 }
 
-function goToScreen3() {
-    const screen2 = document.getElementById('screen2');
-    const screen3 = document.getElementById('screen3');
+function goToScreen2() {
+    transitionScreens('screen1', 'screen2', () => {
+        initNoButton();
+    });
+}
 
-    screen2.classList.remove('active');
-    setTimeout(() => {
-        screen3.classList.add('active');
+// After YES → go to compliments (screen3)
+function goToScreen3() {
+    transitionScreens('screen2', 'screen3', () => {
+        initCompliments();
+    });
+}
+
+// Compliments done → go to reasons (screen4)
+function goToScreen4() {
+    transitionScreens('screen3', 'screen4', () => {
+        initReasons();
+    });
+}
+
+// Reasons done → go to typewriter (screen5)
+function goToScreen5() {
+    transitionScreens('screen4', 'screen5', () => {
+        startTypewriter();
+    });
+}
+
+// Typewriter done → go to final proposal (screen6)
+function goToScreen6() {
+    transitionScreens('screen5', 'screen6', () => {
         launchConfetti();
         launchHeartBurst();
         launchExtraHearts();
-        // Try to play background music
         try {
             const music = document.getElementById('bgMusic');
             music.volume = 0.3;
-            music.play().catch(() => { });
-        } catch (e) { }
-    }, 500);
+            music.play().catch(() => {});
+        } catch (e) {}
+    });
 }
 
 // ---- YES Handler ----
@@ -211,6 +232,127 @@ function handleYes() {
     }
 
     setTimeout(goToScreen3, 1000);
+}
+
+// ============================================
+// SCREEN 3 – COMPLIMENTS CAROUSEL
+// ============================================
+const compliments = [
+    { text: "Your smile could light up the darkest room ✨", emoji: "🌹" },
+    { text: "You're the reason I believe in magic 🪄", emoji: "🦋" },
+    { text: "Being with you feels like coming home 🏡", emoji: "💫" },
+    { text: "You make my heart skip beats... plural 💓", emoji: "🎵" },
+    { text: "The world is more beautiful because you're in it 🌸", emoji: "🌷" },
+    { text: "You're my favorite notification 📱", emoji: "🥰" },
+    { text: "I fall for you a little more every single day 🍂", emoji: "💝" },
+];
+
+let currentCompliment = 0;
+
+function initCompliments() {
+    const dotsContainer = document.getElementById('complimentDots');
+    dotsContainer.innerHTML = '';
+    compliments.forEach((_, i) => {
+        const dot = document.createElement('div');
+        dot.classList.add('compliment-dot');
+        if (i === 0) dot.classList.add('active');
+        dotsContainer.appendChild(dot);
+    });
+}
+
+function nextCompliment() {
+    const card = document.getElementById('complimentCard');
+    const textEl = document.getElementById('complimentText');
+    const emojiEl = document.getElementById('complimentEmoji');
+    const dots = document.querySelectorAll('.compliment-dot');
+    const btn = document.getElementById('btnNextCompliment');
+
+    currentCompliment++;
+
+    // Last compliment → transition to next screen
+    if (currentCompliment >= compliments.length) {
+        card.classList.add('swipe-out-left');
+        setTimeout(() => goToScreen4(), 500);
+        return;
+    }
+
+    // Swipe out animation
+    card.classList.add('swipe-out-left');
+
+    setTimeout(() => {
+        // Update content
+        const c = compliments[currentCompliment];
+        textEl.textContent = c.text;
+        emojiEl.textContent = c.emoji;
+
+        // Update dots
+        dots.forEach((d, i) => d.classList.toggle('active', i === currentCompliment));
+
+        // Reset and swipe in
+        card.classList.remove('swipe-out-left');
+        card.classList.add('swipe-in');
+        setTimeout(() => card.classList.remove('swipe-in'), 500);
+
+        // Update button text on second-to-last
+        if (currentCompliment === compliments.length - 1) {
+            btn.innerHTML = '<span>One more thing...</span><span class="btn-icon">💘</span>';
+        }
+    }, 400);
+}
+
+// ============================================
+// SCREEN 4 – REASONS I LOVE YOU (FLIP CARDS)
+// ============================================
+let flippedCount = 0;
+
+function initReasons() {
+    flippedCount = 0;
+}
+
+function flipCard(card) {
+    if (card.classList.contains('flipped')) return;
+    card.classList.add('flipped');
+    flippedCount++;
+
+    // Show mini heart on flip
+    createMiniHeart(card);
+
+    // After flipping 5+ cards, show the continue button
+    if (flippedCount >= 5) {
+        const btn = document.getElementById('btnReasonsNext');
+        btn.classList.add('visible');
+    }
+}
+
+// ============================================
+// SCREEN 5 – TYPEWRITER LOVE QUOTE
+// ============================================
+function startTypewriter() {
+    const text = "In a world of 8 billion people, my heart chose you... and it would choose you in every lifetime, in every universe, again and again. 💕";
+    const el = document.getElementById('typewriterText');
+    const cursor = document.getElementById('typewriterCursor');
+    const btn = document.getElementById('btnReveal');
+    let i = 0;
+
+    el.textContent = '';
+
+    function type() {
+        if (i < text.length) {
+            el.textContent += text[i];
+            i++;
+            const delay = text[i - 1] === ',' || text[i - 1] === '.' || text[i - 1] === '—' ? 120 : 40;
+            setTimeout(type, delay);
+        } else {
+            // Typing done — show the reveal button
+            cursor.style.display = 'none';
+            setTimeout(() => {
+                btn.style.display = 'inline-flex';
+                btn.style.animation = 'fadeSlideUp 0.8s ease both, yesGlow 1.5s ease-in-out 1s infinite alternate';
+            }, 600);
+        }
+    }
+
+    setTimeout(type, 800);
 }
 
 function createMiniHeart(element) {
