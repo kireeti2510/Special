@@ -15,7 +15,8 @@ html,
 body {
     width: 100%;
     height: 100%;
-    height: 100dvh; /* dynamic viewport height for mobile */
+    height: 100dvh;
+    /* dynamic viewport height for mobile */
     overflow: hidden;
     font-family: 'Quicksand', sans-serif;
     background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 30%, #f48fb1 60%, #f06292 100%);
@@ -429,12 +430,126 @@ body {
 }
 
 .proposal-name {
-    font-family: 'Pacifico', cursive;
-    font-size: clamp(2.5rem, 10vw, 4.5rem);
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(3rem, 12vw, 5.5rem);
     color: #c2185b;
-    margin-bottom: 25px;
-    animation: nameReveal 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
-    letter-spacing: 3px;
+    margin-bottom: 8px;
+    letter-spacing: 5px;
+    display: inline-block;
+    position: relative;
+    font-weight: 400;
+    line-height: 1.2;
+}
+
+/* --- Letter-by-letter reveal --- */
+.name-reveal-wrapper {
+    margin-bottom: 28px;
+    text-align: center;
+}
+
+.name-prefix {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(1.1rem, 4vw, 1.5rem);
+    color: #ad1457;
+    opacity: 0;
+    animation: prefixFadeIn 0.8s ease 0.2s forwards;
+    margin-bottom: 6px;
+    font-weight: 700;
+}
+
+@keyframes prefixFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 0.85;
+        transform: translateY(0);
+    }
+}
+
+.name-letter {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(40px) scale(0.3) rotate(-15deg);
+    animation: letterDrop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    animation-delay: calc(0.5s + var(--i) * 0.12s);
+    /* Shimmer effect */
+    background: linear-gradient(
+        120deg,
+        #c2185b 0%,
+        #e91e63 25%,
+        #ff6090 50%,
+        #e91e63 75%,
+        #c2185b 100%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.name-letter.heart-letter {
+    -webkit-text-fill-color: initial;
+    background: none;
+    animation-delay: calc(0.5s + var(--i) * 0.12s + 0.1s);
+}
+
+/* Shimmer sweep after letters land */
+.proposal-name:after {
+    content: '';
+    display: none; /* using background-clip shimmer instead */
+}
+
+@keyframes letterDrop {
+    0% {
+        opacity: 0;
+        transform: translateY(40px) scale(0.3) rotate(-15deg);
+    }
+    60% {
+        opacity: 1;
+        transform: translateY(-8px) scale(1.1) rotate(3deg);
+    }
+    80% {
+        transform: translateY(3px) scale(0.95) rotate(-1deg);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1) rotate(0deg);
+    }
+}
+
+/* Shimmer animation on each letter after it lands */
+.name-letter {
+    animation: letterDrop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards,
+               shimmer 2.5s ease-in-out 1.8s infinite;
+}
+
+@keyframes shimmer {
+    0% { background-position: 200% center; }
+    100% { background-position: -200% center; }
+}
+
+/* --- Underline flourish --- */
+.name-underline {
+    width: 0;
+    height: 3px;
+    margin: 8px auto 0;
+    background: linear-gradient(90deg, transparent, #e91e63, #ff6090, #e91e63, transparent);
+    border-radius: 2px;
+    animation: underlineGrow 0.8s ease 1.6s forwards;
+    box-shadow: 0 0 12px rgba(233, 30, 99, 0.4);
+}
+
+@keyframes underlineGrow {
+    from {
+        width: 0;
+        opacity: 0;
+    }
+    to {
+        width: 70%;
+        opacity: 1;
+    }
 }
 
 @keyframes nameReveal {
@@ -672,7 +787,8 @@ body {
         margin-bottom: 8px;
     }
 
-    .welcome-sub, .question-sub {
+    .welcome-sub,
+    .question-sub {
         font-size: 0.9rem;
         margin-bottom: 22px;
     }
@@ -697,8 +813,16 @@ body {
     }
 
     .proposal-name {
-        font-size: 2rem;
-        margin-bottom: 15px;
+        font-size: 2.2rem;
+        letter-spacing: 3px;
+    }
+
+    .name-prefix {
+        font-size: 0.95rem;
+    }
+
+    .name-underline {
+        margin-top: 5px;
     }
 
     .proposal-letter {
@@ -763,8 +887,12 @@ body {
     }
 
     .proposal-name {
-        font-size: 2.3rem;
-        margin-bottom: 18px;
+        font-size: 2.8rem;
+        letter-spacing: 4px;
+    }
+
+    .name-prefix {
+        font-size: 1rem;
     }
 
     .proposal-content {
@@ -781,7 +909,7 @@ body {
     }
 
     .proposal-name {
-        font-size: 3rem;
+        font-size: 3.8rem;
     }
 }
 
@@ -800,12 +928,14 @@ body {
         margin-bottom: 8px;
     }
 
-    .welcome-title, .question-title {
+    .welcome-title,
+    .question-title {
         font-size: 1.5rem;
         margin-bottom: 6px;
     }
 
-    .welcome-sub, .question-sub {
+    .welcome-sub,
+    .question-sub {
         font-size: 0.85rem;
         margin-bottom: 18px;
     }
@@ -819,8 +949,17 @@ body {
     }
 
     .proposal-name {
-        font-size: 1.8rem;
-        margin-bottom: 12px;
+        font-size: 2rem;
+        letter-spacing: 2px;
+    }
+
+    .name-prefix {
+        font-size: 0.85rem;
+        margin-bottom: 3px;
+    }
+
+    .name-reveal-wrapper {
+        margin-bottom: 14px;
     }
 
     .proposal-letter {
@@ -842,17 +981,21 @@ body {
 
 /* Landscape phones */
 @media (max-height: 450px) and (orientation: landscape) {
-    .big-heart, .question-heart {
+
+    .big-heart,
+    .question-heart {
         font-size: 35px;
         margin-bottom: 5px;
     }
 
-    .welcome-title, .question-title {
+    .welcome-title,
+    .question-title {
         font-size: 1.3rem;
         margin-bottom: 4px;
     }
 
-    .welcome-sub, .question-sub {
+    .welcome-sub,
+    .question-sub {
         font-size: 0.8rem;
         margin-bottom: 12px;
     }
@@ -863,8 +1006,16 @@ body {
     }
 
     .proposal-name {
-        font-size: 1.5rem;
-        margin-bottom: 8px;
+        font-size: 1.8rem;
+        letter-spacing: 2px;
+    }
+
+    .name-prefix {
+        font-size: 0.8rem;
+    }
+
+    .name-reveal-wrapper {
+        margin-bottom: 10px;
     }
 
     .proposal-content {
