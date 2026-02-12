@@ -1,97 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>💕 For You 💕</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Quicksand:wght@400;600;700&family=Pacifico&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💖</text></svg>" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <title>💕 For You 💕</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Quicksand:wght@400;600;700&family=Pacifico&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💖</text></svg>" />
 </head>
+
 <body>
-  <!-- Cursor heart trail canvas -->
-  <canvas id="heartTrail"></canvas>
+    <!-- Cursor heart trail canvas -->
+    <canvas id="heartTrail"></canvas>
 
-  <!-- Floating hearts background -->
-  <div class="floating-hearts" id="floatingHearts"></div>
+    <!-- Floating hearts background -->
+    <div class="floating-hearts" id="floatingHearts"></div>
 
-  <!-- ===================== SCREEN 1: WELCOME ===================== -->
-  <section class="screen active" id="screen1">
-    <div class="screen-content">
-      <div class="welcome-heart-container">
-        <div class="big-heart pulse">💖</div>
-      </div>
-      <h1 class="welcome-title glow-text">
-        Happy Valentine's Day
-        <span class="heart-sparkle">💕</span>
-      </h1>
-      <p class="welcome-sub">I have something special for you...</p>
-      <button class="btn btn-start" id="btnStart" onclick="goToScreen2()">
-        <span>Open My Heart</span>
-        <span class="btn-icon">💖</span>
-      </button>
-      <div class="sparkle-container" id="sparkles1"></div>
-    </div>
-  </section>
-
-  <!-- ===================== SCREEN 2: QUESTION ===================== -->
-  <section class="screen" id="screen2">
-    <div class="screen-content">
-      <div class="question-heart">💘</div>
-      <h1 class="question-title glow-text">
-        Will you be my Valentine?
-        <span class="heart-sparkle">💘</span>
-      </h1>
-      <p class="question-sub">Choose wisely... there's only one right answer 😏</p>
-      <div class="btn-group">
-        <button class="btn btn-yes" id="btnYes" onclick="handleYes()">
-          <span>YES!</span>
-          <span class="btn-icon">💕</span>
-        </button>
-        <button class="btn btn-no" id="btnNo">
-          <span id="noText">No</span>
-          <span class="btn-icon">🙈</span>
-        </button>
-      </div>
-      <p class="cheeky-msg" id="cheekyMsg"></p>
-    </div>
-  </section>
-
-  <!-- ===================== SCREEN 3: PROPOSAL ===================== -->
-  <section class="screen" id="screen3">
-    <div class="screen-content proposal-content">
-      <div class="confetti-container" id="confetti"></div>
-      <div class="proposal-heart-burst" id="heartBurst"></div>
-      <h1 class="proposal-name glow-text-strong" id="proposalName">VARSHAAA 💖</h1>
-      <div class="proposal-letter" id="proposalLetter">
-        <p class="letter-line" style="--delay: 0.5s">From the moment you walked into my life,</p>
-        <p class="letter-line" style="--delay: 1.0s">everything changed — beautifully. ✨</p>
-        <p class="letter-line" style="--delay: 1.5s">Your smile makes my worst days wonderful,</p>
-        <p class="letter-line" style="--delay: 2.0s">and your laugh is my favorite sound in the world. 🎶</p>
-        <p class="letter-line" style="--delay: 2.8s">Every second with you feels like magic —</p>
-        <p class="letter-line" style="--delay: 3.3s">and I never want it to end. 💫</p>
-        <p class="letter-line" style="--delay: 4.0s">You're not just my Valentine...</p>
-        <p class="letter-line highlight" style="--delay: 4.6s">You're my everything. 💗</p>
-        <p class="letter-line" style="--delay: 5.3s">I promise to love you, cherish you,</p>
-        <p class="letter-line" style="--delay: 5.8s">make you laugh, annoy you just a little 😜,</p>
-        <p class="letter-line" style="--delay: 6.3s">and hold your hand through every adventure. 🤝</p>
-        <p class="letter-line big highlight" style="--delay: 7.2s">I love you more than words can say. ❤️</p>
-        <div class="final-message" style="--delay: 8.2s">
-          <p>Happy Valentine's Day, my love 💞</p>
-          <p class="forever-text">— Forever yours 💌</p>
+    <!-- ===================== SCREEN 1: WELCOME ===================== -->
+    <section class="screen active" id="screen1">
+        <div class="screen-content">
+            <div class="welcome-heart-container">
+                <div class="big-heart pulse">💖</div>
+            </div>
+            <h1 class="welcome-title glow-text">
+                Happy Valentine's Day
+                <span class="heart-sparkle">💕</span>
+            </h1>
+            <p class="welcome-sub">I have something special for you...</p>
+            <button class="btn btn-start" id="btnStart" onclick="goToScreen2()">
+                <span>Open My Heart</span>
+                <span class="btn-icon">💖</span>
+            </button>
+            <div class="sparkle-container" id="sparkles1"></div>
         </div>
-      </div>
-      <div class="extra-hearts" id="extraHearts"></div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Audio (soft romantic tone on YES) -->
-  <audio id="bgMusic" loop preload="auto">
-    <source src="https://assets.mixkit.co/music/preview/mixkit-sweet-love-melody-2115.mp3" type="audio/mpeg" />
-  </audio>
+    <!-- ===================== SCREEN 2: QUESTION ===================== -->
+    <section class="screen" id="screen2">
+        <div class="screen-content">
+            <div class="question-heart">💘</div>
+            <h1 class="question-title glow-text">
+                Will you be my Valentine?
+                <span class="heart-sparkle">💘</span>
+            </h1>
+            <p class="question-sub">Choose wisely... there's only one right answer 😏</p>
+            <div class="btn-group">
+                <button class="btn btn-yes" id="btnYes" onclick="handleYes()">
+                    <span>YES!</span>
+                    <span class="btn-icon">💕</span>
+                </button>
+                <button class="btn btn-no" id="btnNo">
+                    <span id="noText">No</span>
+                    <span class="btn-icon">🙈</span>
+                </button>
+            </div>
+            <p class="cheeky-msg" id="cheekyMsg"></p>
+        </div>
+    </section>
 
-  <script src="script.js"></script>
+    <!-- ===================== SCREEN 3: PROPOSAL ===================== -->
+    <section class="screen" id="screen3">
+        <div class="screen-content proposal-content">
+            <div class="confetti-container" id="confetti"></div>
+            <div class="proposal-heart-burst" id="heartBurst"></div>
+            <h1 class="proposal-name glow-text-strong" id="proposalName">VARSHAAA 💖</h1>
+            <div class="proposal-letter" id="proposalLetter">
+                <p class="letter-line" style="--delay: 0.5s">From the moment you walked into my life,</p>
+                <p class="letter-line" style="--delay: 1.0s">everything changed — beautifully. ✨</p>
+                <p class="letter-line" style="--delay: 1.5s">Your smile makes my worst days wonderful,</p>
+                <p class="letter-line" style="--delay: 2.0s">and your laugh is my favorite sound in the world. 🎶</p>
+                <p class="letter-line" style="--delay: 2.8s">Every second with you feels like magic —</p>
+                <p class="letter-line" style="--delay: 3.3s">and I never want it to end. 💫</p>
+                <p class="letter-line" style="--delay: 4.0s">You're not just my Valentine...</p>
+                <p class="letter-line highlight" style="--delay: 4.6s">You're my everything. 💗</p>
+                <p class="letter-line" style="--delay: 5.3s">I promise to love you, cherish you,</p>
+                <p class="letter-line" style="--delay: 5.8s">make you laugh, annoy you just a little 😜,</p>
+                <p class="letter-line" style="--delay: 6.3s">and hold your hand through every adventure. 🤝</p>
+                <p class="letter-line big highlight" style="--delay: 7.2s">I love you more than words can say. ❤️</p>
+                <div class="final-message" style="--delay: 8.2s">
+                    <p>Happy Valentine's Day, my love 💞</p>
+                    <p class="forever-text">— Forever yours 💌</p>
+                </div>
+            </div>
+            <div class="extra-hearts" id="extraHearts"></div>
+        </div>
+    </section>
+
+    <!-- Audio (soft romantic tone on YES) -->
+    <audio id="bgMusic" loop preload="auto">
+        <source src="https://assets.mixkit.co/music/preview/mixkit-sweet-love-melody-2115.mp3" type="audio/mpeg" />
+    </audio>
+
+    <script src="script.js"></script>
 </body>
+
 </html>
