@@ -213,8 +213,8 @@ function goToScreen6() {
         try {
             const music = document.getElementById('bgMusic');
             music.volume = 0.3;
-            music.play().catch(() => {});
-        } catch (e) {}
+            music.play().catch(() => { });
+        } catch (e) { }
     });
 }
 
@@ -239,12 +239,12 @@ function handleYes() {
 // ============================================
 const compliments = [
     { text: "Your smile could light up the darkest room ✨", emoji: "🌹" },
-    { text: "You're the reason I believe in magic 🪄", emoji: "🦋" },
-    { text: "Being with you feels like coming home 🏡", emoji: "💫" },
-    { text: "You make my heart skip beats... plural 💓", emoji: "🎵" },
-    { text: "The world is more beautiful because you're in it 🌸", emoji: "🌷" },
-    { text: "You're my favorite notification 📱", emoji: "🥰" },
-    { text: "I fall for you a little more every single day 🍂", emoji: "💝" },
+    { text: "Even when you're angry, you look like a cute little queen 👸", emoji: "😤" },
+    { text: "Your slaps hurt... but I'd never dodge them because they're yours 😭", emoji: "�" },
+    { text: "You hit me, kick me, shout at me... and I still choose you every time �", emoji: "🫶" },
+    { text: "You're not just my girl — you're my adorable little dictator 👑", emoji: "😜" },
+    { text: "The world is more beautiful because my queen is in it 🌸", emoji: "🌷" },
+    { text: "I'd take a thousand of your slaps just to see you smile once 🥹", emoji: "�" },
 ];
 
 let currentCompliment = 0;
